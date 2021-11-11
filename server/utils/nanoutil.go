@@ -35,6 +35,7 @@ func AddressToPub(account string) string {
 
 // ValidateAddress - Returns true if a nano address is valid
 func ValidateAddress(account string) bool {
+fmt.Printf("Generating %s", account)
 	if !pawRegex.MatchString(account) {
 		return false
 	}

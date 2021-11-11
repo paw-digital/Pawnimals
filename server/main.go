@@ -103,7 +103,7 @@ func main() {
 	router.Use(CorsMiddleware())
 
 	// Setup socket IO server
-	sio, _ := socketio.NewServer(nil)
+	sio := socketio.NewServer(nil)
 	sio.OnConnect("/", func(s socketio.Conn) error {
 		s.SetContext("")
 		s.Join("bcast")
