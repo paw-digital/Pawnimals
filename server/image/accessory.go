@@ -7,9 +7,9 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/appditto/natricon/server/color"
-	"github.com/appditto/natricon/server/rand"
-	"github.com/appditto/natricon/server/spc"
+	"github.com/paw-digital/Pawnimals/server/color"
+	"github.com/paw-digital/Pawnimals/server/rand"
+	"github.com/paw-digital/Pawnimals/server/spc"
 )
 
 // Accessories - represents accessories for natricon

@@ -1,5 +1,5 @@
 # Add GO to imagemagick image
-FROM appditto/imagemagick:latest as base
+FROM paw-digital/imagemagick:latest as base
 
 FROM base as builder
 

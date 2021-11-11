@@ -4,8 +4,8 @@ import (
 	"math"
 	"strconv"
 
-	"github.com/appditto/natricon/server/color"
-	"github.com/appditto/natricon/server/rand"
+	"github.com/paw-digital/Pawnimals/server/color"
+	"github.com/paw-digital/Pawnimals/server/rand"
 )
 
 // Min and max perceivedBrightness values (between 0 and 100)

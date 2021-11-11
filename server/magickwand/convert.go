@@ -3,7 +3,7 @@ package magickwand
 import (
 	"strings"
 
-	"github.com/appditto/natricon/server/image"
+	"github.com/paw-digital/Pawnimals/server/image"
 	"gopkg.in/gographics/imagick.v3/imagick"
 )
 

@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"math/big"
 	"regexp"
+	"strings"
 
 	"github.com/bbedward/nano/address"
 	"github.com/bbedward/nano/types"
