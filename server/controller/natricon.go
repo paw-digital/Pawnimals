@@ -30,7 +30,7 @@ func (nc NatriconController) GetNonce(c *gin.Context) {
 	address := c.Query("address")
 	valid := utils.ValidateAddress(address)
 	if !valid {
-		c.String(http.StatusBadRequest, "Invalid address")
+		c.String(http.StatusBadRequest, "Invalid addresss")
 		return
 	}
 

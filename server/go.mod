@@ -4,12 +4,12 @@ go 1.14
 
 require (
 	github.com/ajstarks/svgo v0.0.0-20200320125537-f189e35d30ca
-	github.com/bbedward/crypto/ed25519 v0.0.0-20200408160247-f3ed4859f246 // indirect
-	github.com/bbedward/nano v0.0.0-20200408160834-45efd709c9fa
+	github.com/paw-digital/crypto/ed25519 v0.0.0-20211111060414-7ca7a22e134b // indirect
+	github.com/paw-digital/nano v0.0.0-20211111065128-af0e9f7f22dc
 	github.com/bsm/redislock v0.5.0
 	github.com/gin-gonic/gin v1.6.3
 	github.com/go-playground/validator/v10 v10.3.0 // indirect
-	github.com/go-redis/redis/v7 v7.3.0
+	github.com/go-redis/redis/v7 v7.4.0
 	github.com/golang/glog v0.0.0-20160126235308-23def4e6c14b
 	github.com/golang/protobuf v1.4.2 // indirect
 	github.com/google/uuid v1.1.1

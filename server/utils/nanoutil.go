@@ -7,9 +7,10 @@ import (
 	"fmt"
 	"math/big"
 	"regexp"
+	"strings"
 
-	"github.com/bbedward/nano/address"
-	"github.com/bbedward/nano/types"
+	"github.com/paw-digital/nano/address"
+	"github.com/paw-digital/nano/types"
 )
 
 const rawPerNanoStr = "1000000000000000000000000000000"
@@ -18,13 +19,13 @@ var rawPerNano, _ = new(big.Float).SetString(rawPerNanoStr)
 
 const nanoPrecision = 1000000 // 0.000001 NANO precision
 
-const nanoRegexStr = "(?:xrb|nano)(?:_)(?:1|3)(?:[13456789abcdefghijkmnopqrstuwxyz]{59})"
+const pawRegexStr = "(?:paw)(?:_)(?:1|3)(?:[13456789abcdefghijkmnopqrstuwxyz]{59})"
 
-var nanoRegex = regexp.MustCompile(nanoRegexStr)
+var pawRegex = regexp.MustCompile(pawRegexStr)
 
 func GenerateAddress() string {
 	pub, _ := address.GenerateKey()
-	return string(address.PubKeyToAddress(pub))
+	return strings.Replace(string(address.PubKeyToAddress(pub)), "nano_", "paw_", -1)
 }
 
 func AddressToPub(account string) string {
@@ -34,7 +35,7 @@ func AddressToPub(account string) string {
 
 // ValidateAddress - Returns true if a nano address is valid
 func ValidateAddress(account string) bool {
-	if !nanoRegex.MatchString(account) {
+	if !pawRegex.MatchString(account) {
 		return false
 	}
 	return address.ValidateAddress(types.Account(account))
