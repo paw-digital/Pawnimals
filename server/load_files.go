@@ -9,7 +9,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/appditto/natricon/server/image"
+	"github.com/paw-digital/Pawnimals/server/image"
 	"github.com/golang/glog"
 )
 

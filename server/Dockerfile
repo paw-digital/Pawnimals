@@ -1,4 +1,4 @@
-FROM appditto/imagemagick_go:latest as base
+FROM paw-digital/imagemagick_go:latest as base
 
 FROM base as builder
 
@@ -18,7 +18,7 @@ RUN apt-get update && apt-get install -y \
 && rm -rf /var/lib/apt/lists/*
 
 # Copy binary to imagemagick image
-FROM appditto/imagemagick:latest
+FROM paw-digital/imagemagick:latest
 
 USER root
 WORKDIR /root

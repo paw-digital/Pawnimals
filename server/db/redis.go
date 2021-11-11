@@ -8,8 +8,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/appditto/natricon/server/spc"
-	"github.com/appditto/natricon/server/utils"
+	"github.com/paw-digital/Pawnimals/server/spc"
+	"github.com/paw-digital/Pawnimals/server/utils"
 	"github.com/bsm/redislock"
 	"github.com/go-redis/redis/v7"
 	"github.com/golang/glog"

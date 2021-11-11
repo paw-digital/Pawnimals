@@ -1,7 +1,7 @@
 package spc
 
 import (
-	"github.com/appditto/natricon/server/color"
+	"github.com/paw-digital/Pawnimals/server/color"
 )
 
 var Vanities = map[string]*Vanity{

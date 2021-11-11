@@ -8,7 +8,7 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/appditto/natricon/server/spc"
+	"github.com/paw-digital/Pawnimals/server/spc"
 )
 
 type IllustrationType string

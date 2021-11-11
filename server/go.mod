@@ -1,4 +1,4 @@
-module github.com/appditto/natricon/server
+module github.com/paw-digital/Pawnimals/server
 
 go 1.14
 

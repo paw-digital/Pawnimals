@@ -6,12 +6,12 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/appditto/natricon/server/color"
-	"github.com/appditto/natricon/server/db"
-	"github.com/appditto/natricon/server/image"
-	"github.com/appditto/natricon/server/magickwand"
-	"github.com/appditto/natricon/server/spc"
-	"github.com/appditto/natricon/server/utils"
+	"github.com/paw-digital/Pawnimals/server/color"
+	"github.com/paw-digital/Pawnimals/server/db"
+	"github.com/paw-digital/Pawnimals/server/image"
+	"github.com/paw-digital/Pawnimals/server/magickwand"
+	"github.com/paw-digital/Pawnimals/server/spc"
+	"github.com/paw-digital/Pawnimals/server/utils"
 	"github.com/gin-gonic/gin"
 )
 
