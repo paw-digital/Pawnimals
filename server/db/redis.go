@@ -16,7 +16,7 @@ import (
 )
 
 // Prefix for all keys
-const keyPrefix = "natricon"
+const keyPrefix = "pawnimal"
 
 // Singleton to keep assets loaded in memory
 type redisManager struct {

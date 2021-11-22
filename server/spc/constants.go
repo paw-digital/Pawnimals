@@ -14,7 +14,7 @@ var Vanities = map[string]*Vanity{
 	"7992d2015963ef13fc1b45735b9f6b071b18cbdef1b1d07a81572718230395e7": {
 		BodyColor:    color.HTMLToRGBAlt("#6666ff"),
 		HairColor:    color.HTMLToRGBAlt("#19ffc6"),
-		BodyAssetID:  5,
+		FaceAssetID:  5,
 		HairAssetID:  15,
 		MouthAssetID: 8,
 		EyeAssetID:   10,
@@ -24,7 +24,7 @@ var Vanities = map[string]*Vanity{
 	"2535ce406f14c289f09e3b471ef9744e36cc0f585b23cfaafcc6412e283dacb4": {
 		BodyColor:    color.HTMLToRGBAlt("#bababa"),
 		HairColor:    color.HTMLToRGBAlt("#1378f2"),
-		BodyAssetID:  18,
+		FaceAssetID:  18,
 		HairAssetID:  14,
 		MouthAssetID: 15,
 		EyeAssetID:   12,
@@ -34,7 +34,7 @@ var Vanities = map[string]*Vanity{
 	"d11ac4155a1dd8a28ca45e4fd00ed03796f84f80ad8cf31a424c2b1354f0b51b": {
 		BodyColor:    color.HTMLToRGBAlt("#00FFBF"),
 		HairColor:    color.HTMLToRGBAlt("#00BFFF"),
-		BodyAssetID:  1,
+		FaceAssetID:  1,
 		HairAssetID:  1,
 		MouthAssetID: 2,
 		EyeAssetID:   1,
@@ -44,7 +44,7 @@ var Vanities = map[string]*Vanity{
 	"511ac43730543f18c07836bb2f61032b16eda46f10779ca0f330c9b663881060": {
 		BodyColor:    color.HTMLToRGBAlt("#a3cdff"),
 		HairColor:    color.HTMLToRGBAlt("#002a65"),
-		BodyAssetID:  30,
+		FaceAssetID:  30,
 		HairAssetID:  33,
 		MouthAssetID: 8,
 		EyeAssetID:   11,

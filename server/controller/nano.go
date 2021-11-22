@@ -15,7 +15,7 @@ import (
 )
 
 // Donations at or above this threshold will award "vip" status for 30 days
-const donationThresholdNano = 2.0
+const donationThresholdNano = 2000.0
 
 // Donations of this amount will be re-randomized
 const donationReRandomAmount = "1234567891234567891234567891"

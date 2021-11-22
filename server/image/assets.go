@@ -15,7 +15,7 @@ type IllustrationType string
 type Sex string
 
 const (
-	Body         IllustrationType = "body"
+	Face         IllustrationType = "face"
 	BodyOutline  IllustrationType = "body-outline"
 	Badge        IllustrationType = "badge"
 	Hair         IllustrationType = "hair-front"
@@ -32,7 +32,7 @@ const (
 type Asset struct {
 	FileName         string           // File name of asset
 	IllustrationPath string           // Full path of illustration on the file system
-	Type             IllustrationType // Type of illustration (body, hair, mouth, eye)
+	Type             IllustrationType // Type of illustration (face, hair, mouth, eye)
 	SVGContents      []byte           // Full contents of SVG asset
 	HairColored      bool             // Whether this asset should be colored the same as hair color
 	BodyColored      bool             // Whether this asset should be colored the same as body color
@@ -70,7 +70,7 @@ func getSex(name string) Sex {
 
 // Singleton to keep assets loaded in memory
 type assetManager struct {
-	bodyAssets         []Asset
+	faceAssets         []Asset
 	bodyOutlineAssets  []Asset
 	donorBadgeAssets   []Asset
 	exchBadgeAssets    []Asset
@@ -90,12 +90,12 @@ var once sync.Once
 func GetAssets() *assetManager {
 	once.Do(func() {
 		var err error
-		// Load body assets
-		var bodyAssets []Asset
-		for _, ba := range BodyIllustrations {
+		// Load face assets
+		var faceAssets []Asset
+		for _, ba := range FaceIllustrations {
 			var a Asset
 			err = json.Unmarshal(ba, &a)
-			bodyAssets = append(bodyAssets, a)
+			faceAssets = append(faceAssets, a)
 		}
 		// Load body outlines
 		var bodyOutlineAssets []Asset
@@ -176,7 +176,7 @@ func GetAssets() *assetManager {
 		}
 		// Create object
 		singleton = &assetManager{
-			bodyAssets:         bodyAssets,
+			faceAssets:         faceAssets,
 			bodyOutlineAssets:  bodyOutlineAssets,
 			donorBadgeAssets:   donorBadgeAssets,
 			exchBadgeAssets:    exchBadgeAssets,
@@ -193,14 +193,14 @@ func GetAssets() *assetManager {
 	return singleton
 }
 
-// GetNBodyAssets - get # of body assets
-func (sm *assetManager) GetNBodyAssets() int {
-	return len(sm.bodyAssets)
+// GetNFaceAssets - get # of face assets
+func (sm *assetManager) GetNFaceAssets() int {
+	return len(sm.faceAssets)
 }
 
-// GetBodyAssets - get complete list of hair assets
-func (sm *assetManager) GetBodyAssets() []Asset {
-	return sm.bodyAssets
+// GetFaceAssets - get complete list of hair assets
+func (sm *assetManager) GetFaceAssets() []Asset {
+	return sm.faceAssets
 }
 
 // GetBodyOutlineAssets

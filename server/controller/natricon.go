@@ -81,7 +81,7 @@ func (nc NatriconController) GetNano(c *gin.Context) {
 		if badgeType == "" {
 			badgeType = spc.BTNone
 		}
-		if vanity.BodyAssetID > 0 && vanity.HairAssetID > 0 && vanity.EyeAssetID > 0 && vanity.BodyColor != nil && vanity.HairColor != nil {
+		if vanity.FaceAssetID > 0 && vanity.BodyColor != nil && vanity.HairColor != nil {
 			specialNatricon = true
 		} else if vanity.Hash == "" {
 			sha256 = utils.PKSha256(pubKey, nc.Seed)
@@ -317,7 +317,7 @@ func generateSpecialIcon(vanity *spc.Vanity, badgeType spc.BadgeType, c *gin.Con
 		}
 	}
 
-	accessories := image.GetSpecificNatricon(badgeType, outline, outlineColor, vanity.BodyColor, vanity.HairColor, vanity.BodyAssetID, vanity.HairAssetID, vanity.MouthAssetID, vanity.EyeAssetID)
+	accessories := image.GetSpecificNatricon(badgeType, outline, outlineColor, vanity.BodyColor, vanity.HairColor, vanity.FaceAssetID, vanity.HairAssetID, vanity.MouthAssetID, vanity.EyeAssetID)
 	svg, err := image.CombineSVG(accessories)
 	if err != nil {
 		c.String(http.StatusInternalServerError, "Error occured")

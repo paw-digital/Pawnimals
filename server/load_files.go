@@ -62,27 +62,27 @@ func LoadAssetsToArray() {
 
 	ret := "package image\n\n"
 
-	var bodyAsset image.Asset
-	ret += "var BodyIllustrations = [][]byte{\n"
-	fPath := path.Join(wd, "assets", "illustrations", string(image.Body))
+	var faceAsset image.Asset
+	ret += "var FaceIllustrations = [][]byte{\n"
+	fPath := path.Join(wd, "assets", "illustrations", string(image.Face))
 	err = filepath.Walk(fPath, func(path string, info os.FileInfo, err error) error {
 		if strings.Contains(info.Name(), ".svg") {
-			bodyAsset = image.Asset{}
-			bodyAsset.FileName = info.Name()
-			bodyAsset.IllustrationPath = path
-			bodyAsset.SVGContents, err = ioutil.ReadFile(path)
+			faceAsset = image.Asset{}
+			faceAsset.FileName = info.Name()
+			faceAsset.IllustrationPath = path
+			faceAsset.SVGContents, err = ioutil.ReadFile(path)
 			if err != nil {
 				glog.Fatalf("Couldn't load file %s", path)
 				panic(err.Error())
 			}
-			bodyAsset.HairColored = false
-			bodyAsset.BodyColored = true
-			bodyAsset.LightOnly = false
-			bodyAsset.DarkColored = false
-			bodyAsset.DarkBWColored = false
-			bodyAsset.Sex = getSex(info.Name())
-			bodyAsset.BLK299 = false
-			encoded, _ := json.Marshal(bodyAsset)
+			faceAsset.HairColored = false
+			faceAsset.BodyColored = true
+			faceAsset.LightOnly = false
+			faceAsset.DarkColored = false
+			faceAsset.DarkBWColored = false
+			faceAsset.Sex = getSex(info.Name())
+			faceAsset.BLK299 = false
+			encoded, _ := json.Marshal(faceAsset)
 			ret += strings.ReplaceAll(strings.ReplaceAll(strings.ReplaceAll(fmt.Sprint(encoded), "[", "{"), "]", "}"), " ", ", ") + ","
 		}
 		return nil
