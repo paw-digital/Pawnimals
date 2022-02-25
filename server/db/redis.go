@@ -481,7 +481,7 @@ func (r *redisManager) GetNonce(pubkey string) int {
 }
 
 func (r *redisManager) IncreaseNonce(pubkey string) int {
-	lock, err := r.Locker.Obtain(fmt.Sprintf("natricon:noncelock:%s", pubkey), 100*time.Second, &redislock.Options{
+	lock, err := r.Locker.Obtain(fmt.Sprintf("pawnimal:noncelock:%s", pubkey), 100*time.Second, &redislock.Options{
 		RetryStrategy: redislock.LimitRetry(
 			redislock.LinearBackoff(
 				1*time.Second,
@@ -503,7 +503,7 @@ func (r *redisManager) IncreaseNonce(pubkey string) int {
 }
 
 func (r *redisManager) SetNonce(pubkey string, nonce int) int {
-	lock, err := r.Locker.Obtain(fmt.Sprintf("natricon:noncelock:%s", pubkey), 100*time.Second, &redislock.Options{
+	lock, err := r.Locker.Obtain(fmt.Sprintf("pawnimal:noncelock:%s", pubkey), 100*time.Second, &redislock.Options{
 		RetryStrategy: redislock.LimitRetry(
 			redislock.LinearBackoff(
 				1*time.Second,

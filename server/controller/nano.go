@@ -18,7 +18,8 @@ import (
 const donationThresholdNano = 2000.0
 
 // Donations of this amount will be re-randomized
-const donationReRandomAmount = "1234567891234567891234567891"
+//const donationReRandomAmount = "1234567891234567891234567891"
+const donationReRandomAmount = "1000000000000000000000000000"
 
 type NanoController struct {
 	RPCClient       *net.RPCClient
@@ -36,30 +37,59 @@ func (nc NanoController) Callback(confirmationResponse net.ConfirmationResponse)
 	if block["link_as_account"] == nc.DonationAccount && block["link_as_account"] != block["account"] {
 		doReRandom := false
 		nonce := 0
-		if len(amount) == 28 && string(amountRune[0:6]) == "123456" {
-			amountBig, _ := utils.RawToBigInt(amount)
-			reRandomTrigger, _ := utils.RawToBigInt(donationReRandomAmount)
-			if amountBig.Cmp(reRandomTrigger) == 1 {
-				delta := amountBig.Sub(amountBig, reRandomTrigger)
-				nonce64 := delta.Int64()
-				// If it fits into an int64, use this nonce and re-random
-				if nonce64 != 0 {
+		glog.Error(string(amountRune[0:6]))
+		glog.Error(len(amount))
+		
+		if(len(amount) == 27 && string(amountRune[0:6]) == "999999") {
+			// Remove nonce
+			doReRandom = true
+			nonce = db.NoNonceApplied
+		} else {
+			//if len(amount) == 28 && string(amountRune[0:6]) == "123456" {
+			if len(amount) == 28 && string(amountRune[0:6]) == "100000" {
+				amountBig, _ := utils.RawToBigInt(amount)
+				reRandomTrigger, _ := utils.RawToBigInt(donationReRandomAmount)
+				glog.Error(amountBig)
+				glog.Error(reRandomTrigger)
+				glog.Error(amountBig.Cmp(reRandomTrigger))
+				if amountBig.Cmp(reRandomTrigger) == 1 {
+					delta := amountBig.Sub(amountBig, reRandomTrigger)
+					nonce64 := delta.Int64()
+					// If it fits into an int64, use this nonce and re-random
+					if nonce64 != 0 {
+						doReRandom = true
+						nonce = int(nonce64)
+					}
+				} else if amountBig.Cmp(reRandomTrigger) == 0 {
+					// Do re-random with nonce 0
 					doReRandom = true
-					nonce = int(nonce64)
-				}
-			} else if amountBig.Cmp(reRandomTrigger) == 0 {
-				// Do re-random with nonce 0
-				doReRandom = true
-			} else if amountBig.Cmp(reRandomTrigger) == -1 {
-				delta := amountBig.Sub(amountBig, reRandomTrigger)
-				nonce64 := delta.Int64()
-				if nonce64 == -1 {
-					// Remove nonce
-					doReRandom = true
-					nonce = db.NoNonceApplied
+				} else if amountBig.Cmp(reRandomTrigger) == -1 {
+					delta := amountBig.Sub(amountBig, reRandomTrigger)
+					nonce64 := delta.Int64()
+					if nonce64 == -1 {
+						// Remove nonce
+						doReRandom = true
+						nonce = db.NoNonceApplied
+					}
 				}
 			}
 		}
+		//} else {
+		//	amountBig, _ := utils.RawToBigInt(amount)
+		//	defaultAmount, _ := utils.RawToBigInt("1000000000000000000000000000")
+		//	delta := amountBig.Sub(amountBig, defaultAmount)
+		//	nonce64 := delta.Int64()
+		//	nonce = int(nonce64)
+			
+		//	glog.Error(string(amountRune[0:6]))
+		//	glog.Error(amountRune[0:6])
+		//	glog.Error(amount)
+		//	//nonce = int(amountBig.Int64())
+		//	glog.Error(nonce)
+		//	pubkey := utils.AddressToPub(block["account"].(string))
+		//	db.GetDB().SetNonce(pubkey, nonce)
+		//	//newNonce := db.GetDB().SetNonce(pubkey, nonce)
+		//}
 		if doReRandom {
 			// Special handling for re-randomizing natricon
 			pubkey := utils.AddressToPub(block["account"].(string))
@@ -77,7 +107,7 @@ func (nc NanoController) Callback(confirmationResponse net.ConfirmationResponse)
 				return
 			}
 			// Lock refund
-			lock, err := db.GetDB().Locker.Obtain(fmt.Sprintf("natricon:refundl:%s", hash), 100*time.Second, nil)
+			lock, err := db.GetDB().Locker.Obtain(fmt.Sprintf("pawnimal:refundl:%s", hash), 100*time.Second, nil)
 			if err == redislock.ErrNotObtained {
 				return
 			} else if err != nil {
@@ -105,7 +135,7 @@ func (nc NanoController) Callback(confirmationResponse net.ConfirmationResponse)
 			}
 			nc.SIOServer.BroadcastToRoom("", "bcast", "donation_event", data)
 			// Calc donor duration with lock
-			lock, err := db.GetDB().Locker.Obtain(fmt.Sprintf("natricon:callback_lock:%s", hash), 100*time.Second, nil)
+			lock, err := db.GetDB().Locker.Obtain(fmt.Sprintf("pawnimal:callback_lock:%s", hash), 100*time.Second, nil)
 			if err == redislock.ErrNotObtained {
 				return
 			} else if err != nil {
