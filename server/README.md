@@ -9,6 +9,53 @@ natricon is built in [GOLang](http://golang.org/)
 
 The natricon backend requires ImageMagick development libraries to be installed. ImageMagick should be compiled with librsvg, libxml2, libpng, and libwebp.
 
+## Installing pre requisites on Ubuntu 20.04
+### Installing GO
+```bash
+curl -OL https://golang.org/dl/go1.16.7.linux-amd64.tar.gz
+sha256sum go1.16.7.linux-amd64.tar.gz
+sudo tar -C /usr/local -xvf go1.16.7.linux-amd64.tar.gz
+
+# edit profile
+sudo nano ~/.profile
+# add this to the end of the file
+export PATH=$PATH:/usr/local/go/bin
+
+# run this line
+source ~/.profile
+```
+
+### Installing Redis
+```bash
+sudo apt install redis-server
+```
+
+
+### Install ImageMagick
+
+```bash
+sudo apt-get install build-essential
+sudo apt install libpng16-16
+sudo apt install librsvg2-dev
+sudo apt install libxml2-dev
+sudo apt install libwebp-dev
+wget https://download.imagemagick.org/ImageMagick/download/ImageMagick.tar.gz
+tar -axvf ImageMagick.tar.gz
+cd ImageMagick-7.1.0-13/
+
+./configure --with-rsvg=yes --with-xml=yes --with-png=yes --with-webp=yes
+# the ouput should show all flags with yes
+#--with-xml=yes              yes
+#--with-png=yes              yes
+#--with-webp=yes             yes
+#--with-rsvg=yes             yes
+make
+make install
+sudo ldconfig
+# convert has to and should output png rsvg webp and xml
+convert --version
+```
+
 ## Natricon server build setup
 
 ```bash
